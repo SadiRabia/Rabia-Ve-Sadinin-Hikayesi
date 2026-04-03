@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sadi ve Rabia'nın Hikayesi ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    text-align: center;
+}
+
+/* Kalp animasyonu */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    color: red;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Kart tasarımı */
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* Buton */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+
+/* Fotoğraf grid */
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.photos img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover efekti: hafif büyüme ve gölge */
+.photos img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* Modal arka plan */
+.modal {
+    display: none; /* gizli */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Modal aktif olduğunda görünür yap */
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal içi foto */
+.modal img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.4s ease;
+}
+
+/* Modal aktif foto büyümesi */
+.modal.show img {
+    transform: scale(1);
+}
+
+/* Çarpı butonu */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>❤️ Sadi ve Rabia'nın Hikayesi ❤️</h1>
+
+<div class="card">
+    <h2>Canım Rabia'mmmm 💞💞💞💞</h2>
+    <p>Hayatıma girdiğin gün için her an şükrediyorum, iyi ki seninle karşılaştım, iyi ki benimsin sevgilim 💖</p>
+</div>
+
+<div class="card">
+    <h2>Ne kadar süredir birlikteyiz?</h2>
+    <p id="counter"></p>
+</div>
+
+<div class="card">
+    <h2>Güzel Anılarımız 📸</h2>
+    <div class="photos">
+        <img src="foto1.jpeg" alt="">
+        <img src="foto2.jpeg" alt="">
+        <img src="foto3.jpeg" alt="">
+        <img src="foto4.jpeg" alt="">
+        <img src="foto5.jpeg" alt="">
+        <img src="foto6.jpeg" alt="">
+    </div>
+</div>
+
+<!-- Şarkı ekleme kart olarak düzenlendi -->
+<div class="card">
+    <h2>Şarkımız 🎶 (Şimdilik)</h2>
+    <audio id="mySong" controls>
+        <source src="sarki.m4a" type="audio/mp4">
+        Tarayıcınız audio etiketini desteklemiyor.
+    </audio>
+</div>
+
+<div class="card">
+    <h2>Sana Özel Mesaj 💌</h2>
+    <button onclick="mesaj()">Görmek İçin Tıkla 💞</button>
+    <p id="mesaj"></p>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="photoModal">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <img src="" id="modalImg" alt="">
+</div>
+
+<script>
+// Tarih
+let baslangic = new Date(2025, 11, 28);
+
+function hesapla() {
+    let now = new Date();
+    let diff = now - baslangic;
+    let days = Math.floor(diff / (1000*60*60*24));
+    document.getElementById("counter").innerText =
+        days + " gündür birlikteyiz 💞";
+}
+hesapla();
+
+// Mesaj
+function mesaj() {
+    document.getElementById("mesaj").innerText =
+        "Seni sevmemin birçok nedeni var bebeğim ama hepsini buraya yazsam maalesef sığmaz, bu nedenle bazılarını söyleyeyim. Bu kadar anlayışlı olmanı, bu kadar iyi niyetli olmanı ve birçok konuda aynı fikirde olmamızı çok seviyorum. O güzel gözlerini de unutamam tabii ki onları bir ayrı seviyorum. Ve ek olarakkkk bu kadar tatlış bir kuduruk olmanı da çok seviyorum 😉. Kısacası seni çok ama çok seviyorum bebeğimmmm 💞";
+}
+
+// Kalp üretme
+function createHeart() {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+setInterval(createHeart, 300);
+
+// Foto tıklayınca modal açma
+const photos = document.querySelectorAll('.photos img');
+const modal = document.getElementById('photoModal');
+const modalImg = document.getElementById('modalImg');
+const closeBtn = document.getElementById('closeModal');
+
+photos.forEach(photo => {
+    photo.addEventListener('click', () => {
+        modal.classList.add('show');
+        modalImg.src = photo.src;
+    });
+});
+
+// Çarpı ile kapatma
+closeBtn.addEventListener('click', () => {
+    modal.classList.remove('show');
+});
+
+// Modalın dışına tıklayınca kapatma
+modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
